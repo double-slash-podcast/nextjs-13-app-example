@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { getPages } from '../../__API__'
 
 async function getPage(slug) {
@@ -7,7 +7,12 @@ async function getPage(slug) {
 }
 
 export default async function Page({ params }) {
-  const page = await getPage(params.slug)
+  const arr = params.slug
+  const [slug] = arr || []
+  const page = await getPage(slug || '')
+  if (!page) {
+    notFound()
+  }
   return (
     <>
       <h1 className="my-8 text-3xl font-bold">{page?.title}</h1>
@@ -19,7 +24,9 @@ export default async function Page({ params }) {
 export async function generateStaticParams() {
   const pages = await getPages()
   pages.shift()
-  return pages.map((page) => ({
-    slug: page.slug,
+  const paths = pages.map((page) => ({
+    slug: [page.slug],
   }))
+  paths.push({ slug: [] })
+  return paths
 }
