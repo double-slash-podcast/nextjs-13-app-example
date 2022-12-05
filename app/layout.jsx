@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
       <head />
       <body className="bg-gray-50">
         <Header />
-        <main className="max-w-4xl min-h-screen px-4 py-8 mx-auto">
+        <main className="max-w-5xl min-h-screen px-4 py-8 mx-auto">
           {children}
         </main>
         <footer className="flex justify-center w-full px-2 py-6 bg-gray-200 border-t border-gray-300">

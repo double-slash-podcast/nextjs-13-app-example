@@ -1,8 +1,7 @@
-import { getPosts } from '../../../__API__'
+import { getPosts } from '../../../../__API__'
 
 async function getPost(id) {
   const res = await fetch(`http://localhost:3000/api/getPost?id=${id}`)
-  console.log('post fetch')
   return res.json()
 }
 
